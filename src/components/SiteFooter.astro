@@ -1,0 +1,207 @@
+---
+const year = new Date().getFullYear();
+
+const informacion = [
+  { label: 'Cartago, Costa Rica', href: null },
+  { label: 'info@monograma.lat', href: 'mailto:info@monograma.lat' },
+];
+
+const social = [
+  { label: 'Facebook',  href: 'https://www.facebook.com/monograma.cr/' },
+  { label: 'Instagram', href: 'https://www.instagram.com/monograma.cr' },
+  { label: 'Behance',   href: 'https://www.behance.net/raulhernandez41' },
+];
+---
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <!-- Columna: marca + tagline -->
+      <div class="footer-col footer-col--brand">
+        <a href="/" class="footer-brand">
+          <img
+            src="/images/imagoFondoOscuro_1.png"
+            alt="Monograma — Estudio Creativo"
+            class="footer-logo"
+          />
+        </a>
+        <p class="footer-tagline">
+          Perfil multidisciplinario que integra desarrollo de software, diseño UX/UI,
+          fotografía y marketing digital para crear soluciones creativas,
+          funcionales y estratégicas.
+        </p>
+        <p class="footer-signature">— Raúl Hdz Molina</p>
+      </div>
+
+      <!-- Columna: información -->
+      <div class="footer-col">
+        <h4 class="footer-heading">Información</h4>
+        <ul class="footer-links">
+          {informacion.map(i => (
+            <li>
+              {i.href ? (
+                <a href={i.href}>{i.label}</a>
+              ) : (
+                <span class="footer-info-text">{i.label}</span>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Columna: seguinos -->
+      <div class="footer-col">
+        <h4 class="footer-heading">Síguenos</h4>
+        <ul class="footer-links">
+          {social.map(s => (
+            <li>
+              <a href={s.href} target="_blank" rel="noopener noreferrer">
+                {s.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">
+        © {year} Monograma — Estudio Creativo. Todos los derechos reservados.
+      </p>
+      <p class="footer-credit">
+        Hecho con cariño en Costa Rica 🇨🇷
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--pixel-black);
+    color: rgba(250, 248, 243, 0.7);
+    padding: 4rem 0 2rem;
+    font-size: .9rem;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(250, 248, 243, 0.1);
+  }
+
+  /* ===== Columna de marca ===== */
+  .footer-brand {
+    display: inline-block;
+    margin-bottom: 1.25rem;
+  }
+
+  .footer-logo {
+    height: 40px;
+    width: auto;
+    display: block;
+  }
+
+  .footer-tagline {
+    color: rgba(250, 248, 243, 0.6);
+    font-size: .88rem;
+    line-height: 1.65;
+    margin: 0 0 .85rem;
+    max-width: 380px;
+  }
+
+  .footer-signature {
+    color: rgba(250, 248, 243, 0.45);
+    font-size: .8rem;
+    font-style: italic;
+    margin: 0;
+  }
+
+  .footer-info-text {
+  color: rgba(250, 248, 243, 0.7);
+  font-size: .9rem;
+  display: inline-block;
+}
+
+  /* ===== Columnas de links ===== */
+  .footer-heading {
+    font-family: var(--font-display);
+    font-size: 1.5rem;              /* ← antes .75rem, ahora x2 */
+    font-weight: 700;
+    letter-spacing: .08em;          /* ← bajamos de .2em a .08em, porque con letras más grandes .2em queda muy separado */
+    text-transform: uppercase;
+    color: var(--paper-white);
+    margin: 0 0 1.25rem;
+  }
+
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .65rem;
+  }
+
+  .footer-links a {
+    color: rgba(250, 248, 243, 0.7);
+    font-size: .9rem;
+    transition: color .2s ease, transform .2s ease;
+    display: inline-block;
+  }
+
+  .footer-links a:hover {
+    color: var(--paper-white);
+    transform: translateX(3px);
+  }
+
+  /* ===== Bottom ===== */
+  .footer-bottom {
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-size: .82rem;
+    color: rgba(250, 248, 243, 0.45);
+  }
+
+  .footer-copy,
+  .footer-credit {
+    margin: 0;
+  }
+
+  .footer-credit {
+    font-style: italic;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 860px) {
+    .footer-top {
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+    .footer-col--brand {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .site-footer {
+      padding: 3rem 0 1.5rem;
+    }
+    .footer-top {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding-bottom: 2rem;
+    }
+    .footer-bottom {
+      flex-direction: column;
+      text-align: center;
+    }
+    .footer-tagline {
+      max-width: none;
+    }
+  }
+</style>

@@ -1,0 +1,35 @@
+---
+const items = [
+  { img: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&q=70', title: 'Noche serena', text: 'Composición minimalista con acento cian.' },
+  { img: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&q=70', title: 'Niebla al alba', text: 'Tipografía clara sobre imágenes suaves.' },
+  { img: 'https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=800&q=70', title: 'Bosque profundo', text: 'Ritmo visual consistente en cada card.' },
+];
+---
+<section class="section section--dark" id="work">
+  <!-- <span class="section-title">Proyectos</span>-->
+  <div class="container">
+    <header class="section-head">
+      <h2>Casos recientes</h2>
+      <p>Tres piezas seleccionadas con la misma paleta y ritmo.</p>
+    </header>
+    <div class="grid grid-3">
+      {items.map(i => (
+        <article class="card">
+          <img src={i.img} alt="" loading="lazy" />
+          <div class="card-body">
+            <h3>{i.title}</h3>
+            <p>{i.text}</p>
+            <a href="#" class="btn btn-ghost">Ver más</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .section--dark .card { background: var(--dark-2); border-color: #3a3a3a; }
+  .section--dark .card p { color: #b9b9b9; }
+  .section--dark .btn-ghost { color: #eee; border-color: #3a3a3a; }
+  .section--dark .btn-ghost:hover { border-color: #eee; }
+</style>
