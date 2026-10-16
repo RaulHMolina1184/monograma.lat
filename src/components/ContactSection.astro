@@ -79,6 +79,38 @@
     gap: 1.25rem;
   }
 
+  .contact-form .btn {
+    align-self: flex-start;
+    padding: .9rem 1.75rem;
+    font-size: .95rem;
+    margin-top: .25rem;
+    background: var(--nintendo-red);
+    color: var(--paper-white);
+    border: 2px solid transparent;
+    border-radius: 8px;
+    font-weight: 700;
+    letter-spacing: .01em;
+    cursor: pointer;
+    transition:
+      background .2s ease,
+      color .2s ease,
+      border-color .2s ease,
+      transform .15s ease;
+  }
+
+  .contact-form .btn:hover {
+    background: var(--paper-white);
+    color: var(--nintendo-red);
+    border-color: var(--nintendo-red);
+    transform: translateY(-1px);
+  }
+
+  .contact-form .btn:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
   .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
