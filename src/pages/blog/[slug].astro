@@ -1,8 +1,15 @@
 ---
 import Base from '../../layouts/Base.astro';
 
-// En el futuro, esto se conectará a Content Collections para leer el Markdown
-// Por ahora es un placeholder visual
+// 1. Le decimos a Astro qué rutas generar
+export function getStaticPaths() {
+  return [
+    { params: { slug: 'diseno-ux-conversiones' } },
+    { params: { slug: 'fotografia-de-marca' } }
+  ];
+}
+
+// 2. Recibimos el slug actual
 const { slug } = Astro.params;
 ---
 <Base title={`Artículo | Monograma`}>
