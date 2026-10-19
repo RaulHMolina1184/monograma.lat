@@ -1,0 +1,89 @@
+---
+const latestPosts = [
+  {
+    title: 'Cómo el diseño UX mejora tus conversiones',
+    date: 'Oct 15, 2026',
+    slug: 'diseno-ux-conversiones',
+  },
+  {
+    title: 'La importancia de la fotografía de marca',
+    date: 'Oct 10, 2026',
+    slug: 'fotografia-de-marca',
+  }
+];
+---
+<section class="section section--blog-preview" style="padding: var(--section-y) 0; background: var(--surface);">
+  <div class="container">
+    <header class="blog-head" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem;">
+      <h2 style="font-family: var(--font-display); font-size: 2rem; text-transform: uppercase; margin: 0;">Del Blog</h2>
+      <a href="/blog" style="color: var(--nintendo-red); font-weight: 700; font-size: 0.95rem;">Ver todos &rarr;</a>
+    </header>
+
+    <div class="blog-list">
+      {latestPosts.map((post) => (
+        <a href={`/blog/${post.slug}`} class="blog-row">
+          <span class="blog-row-date">{post.date}</span>
+          <h3 class="blog-row-title">{post.title}</h3>
+          <span class="blog-row-arrow">→</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .blog-list {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--line);
+  }
+
+  .blog-row {
+    display: grid;
+    grid-template-columns: 120px 1fr 40px;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+
+  .blog-row:hover {
+    background: var(--bg);
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .blog-row-date {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+
+  .blog-row-title {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    color: var(--ink);
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .blog-row-arrow {
+    color: var(--nintendo-red);
+    font-size: 1.5rem;
+    transition: transform 0.2s ease;
+  }
+
+  .blog-row:hover .blog-row-arrow {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 640px) {
+    .blog-row {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+    .blog-row-arrow { display: none; }
+  }
+</style>

@@ -1,0 +1,32 @@
+---
+import Base from '../../layouts/Base.astro';
+
+// En el futuro, esto se conectará a Content Collections para leer el Markdown
+// Por ahora es un placeholder visual
+const { slug } = Astro.params;
+---
+<Base title={`Artículo | Monograma`}>
+  <article class="post-container" style="padding: 8rem 0 4rem;">
+    <div class="container" style="max-width: 720px;">
+      <a href="/blog" style="color: var(--ink-soft); font-size: 0.9rem; margin-bottom: 2rem; display: inline-block;">&larr; Volver al blog</a>
+      
+      <header style="margin-bottom: 3rem;">
+        <span style="color: var(--nintendo-red); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase;">Diseño</span>
+        <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.1; margin: 1rem 0;">Título del artículo de prueba</h1>
+        <p style="color: var(--ink-soft); font-size: 1.1rem;">Publicado el 15 de Octubre, 2026 por Raúl Hdz.</p>
+      </header>
+
+      <div class="post-content" style="font-size: 1.1rem; line-height: 1.8; color: var(--ink);">
+        <p>Este es el contenido del artículo. Aquí es donde Astro inyectará el Markdown que escribas en el futuro.</p>
+        <p>El diseño de esta página está preparado para que los textos largos se lean perfectamente, con un ancho máximo de 720px, ideal para la lectura.</p>
+      </div>
+    </div>
+  </article>
+</Base>
+
+<style>
+  /* Estilos básicos para lectura de texto */
+  .post-content p {
+    margin-bottom: 1.5rem;
+  }
+</style>

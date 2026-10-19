@@ -1,0 +1,102 @@
+---
+import Base from '../layouts/Base.astro';
+
+// Placeholder temporal de posts (luego se conectarán a Markdown)
+const posts = [
+  {
+    title: 'Cómo el diseño UX mejora tus conversiones',
+    description: 'Descubre por qué invertir en la experiencia de usuario no es un gasto, sino una inversión directa en ventas.',
+    date: 'Octubre 15, 2026',
+    slug: 'diseno-ux-conversiones',
+  },
+  {
+    title: 'La importancia de la fotografía de marca',
+    description: 'Una imagen vale más que mil palabras, pero una imagen estratégica vale más que mil ventas.',
+    date: 'Octubre 10, 2026',
+    slug: 'fotografia-de-marca',
+  }
+];
+---
+<Base title="Blog">
+  <section class="section section--blog" style="padding: 6rem 0; min-height: 60vh;">
+    <div class="container">
+      <header class="blog-head">
+        <h1 style="font-family: var(--font-display); font-size: 3rem; margin-bottom: 1rem; text-transform: uppercase;">Blog</h1>
+        <p style="max-width: 600px; font-size: 1.1rem; color: var(--ink-soft);">
+          Ideas, estrategias y pensamientos sobre diseño, software, marketing y fotografía.
+        </p>
+      </header>
+
+      <div class="blog-grid">
+        {posts.map((post) => (
+          <a href={`/blog/${post.slug}`} class="blog-card">
+            <span class="blog-date">{post.date}</span>
+            <h2 class="blog-title">{post.title}</h2>
+            <p class="blog-desc">{post.description}</p>
+            <span class="blog-readmore">Leer artículo &rarr;</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .blog-head {
+    margin-bottom: 4rem;
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+
+  .blog-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 2.5rem;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .blog-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(31, 31, 31, .08);
+    border-color: transparent;
+  }
+
+  .blog-date {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-soft);
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+
+  .blog-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--ink);
+    margin: 0 0 1rem;
+    line-height: 1.3;
+  }
+
+  .blog-desc {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+  }
+
+  .blog-readmore {
+    color: var(--nintendo-red);
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+</style>

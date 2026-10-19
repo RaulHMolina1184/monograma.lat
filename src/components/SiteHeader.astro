@@ -10,22 +10,34 @@ const path = Astro.url.pathname;
 <header class="site-header">
   <div class="container header-inner">
     <a href="/" class="brand">
-      <img
-        src="/images/imagoHeader.png"
-        alt="Monograma — Estudio Creativo"
-        class="brand-logo"
-      />
+      <img src="/images/imagoFondoClaro.png" alt="Monograma" class="brand-logo" />
     </a>
-    <nav class="nav">
+
+    <!-- Navegación Desktop -->
+    <nav class="nav-desktop">
       {links.map(l => (
         <a href={l.href} class={path === l.href ? 'is-active' : ''}>{l.label}</a>
       ))}
       <a href="/contact" class="btn btn-primary">Conversemos</a>
     </nav>
+
+    <!-- Navegación Móvil -->
+    <details class="nav-mobile">
+      <summary aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </summary>
+      <div class="mobile-menu-panel">
+        {links.map(l => (
+          <a href={l.href} class={path === l.href ? 'is-active' : ''}>{l.label}</a>
+        ))}
+        <a href="/contact" class="btn btn-primary">Conversemos</a>
+      </div>
+    </details>
   </div>
 </header>
 
 <style>
+  /* Estilos base del header que ya tenías */
   .site-header {
     position: sticky;
     top: 0;
@@ -34,103 +46,88 @@ const path = Astro.url.pathname;
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--line);
   }
-
   .header-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 1rem 0;
   }
+  .brand-logo { height: 40px; width: auto; display: block; }
 
-  .brand {
-    display: inline-flex;
-    align-items: center;
-    gap: .55rem;
-  }
-
-  .brand-logo {
-    height: 40px;
-    width: auto;
-    display: block;
-  }
-
-  .nav {
+  /* Navegación Desktop */
+  .nav-desktop {
     display: flex;
     align-items: center;
     gap: 1.5rem;
   }
-
-  .nav a {
+  .nav-desktop a {
     color: var(--ink-soft);
     font-weight: 500;
     font-size: .95rem;
-    position: relative;
     transition: color .2s ease;
   }
-
-  .nav a:hover,
-  .nav a.is-active {
-    color: var(--ink);
-  }
-
-  .nav a.is-active::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -6px;
-    height: 2px;
-    background: var(--nintendo-red);
-    border-radius: 2px;
-  }
-
-  .nav .btn {
+  .nav-desktop a:hover, .nav-desktop a.is-active { color: var(--ink); }
+  
+  /* Tu botón rojo existente */
+  .nav-desktop .btn, .mobile-menu-panel .btn {
     background: var(--nintendo-red);
     color: var(--paper-white);
     padding: .65rem 1.4rem;
     font-size: .9rem;
     font-weight: 700;
-    letter-spacing: .01em;
     border: 2px solid transparent;
-    
-    transition:
-      background .2s ease,
-      color .2s ease,
-      border-color .2s ease,
-      transform .15s ease;
+    border-radius: 8px;
+    transition: all .2s ease;
   }
-
-  .nav .btn:hover {
+  .nav-desktop .btn:hover, .mobile-menu-panel .btn:hover {
     background: var(--paper-white);
     color: var(--nintendo-red);
     border-color: var(--nintendo-red);
     transform: translateY(-1px);
   }
 
-  /* ===== Tablets ===== */
-  @media (max-width: 860px) {
-    .header-inner { padding: .85rem 0; }
-    .brand-logo { height: 34px; }
-    .nav { gap: 1rem; }
-    .nav a { font-size: .9rem; }
-    .nav .btn {
-      padding: .55rem 1.1rem;
-      font-size: .85rem;
-    }
+  /* Menú Móvil Oculto por defecto */
+  .nav-mobile { display: none; position: relative; }
+  
+  /* Hamburguesa */
+  .nav-mobile summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: .5rem;
   }
+  .nav-mobile summary::-webkit-details-marker { display: none; }
+  .nav-mobile summary span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--ink);
+    transition: .2s ease;
+  }
+  
+  /* Panel desplegable */
+  .mobile-menu-panel {
+    position: absolute;
+    top: calc(100% + 1rem);
+    right: 0;
+    width: 200px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    box-shadow: var(--shadow-md);
+  }
+  .mobile-menu-panel a { color: var(--ink); font-weight: 500; }
+  .mobile-menu-panel .btn { text-align: center; margin-top: .5rem; }
 
-  /* ===== Móviles ===== */
-  @media (max-width: 640px) {
-    .header-inner {
-      padding: .75rem 0;
-      gap: .75rem;
-    }
-    .brand-logo { height: 30px; }
-    .nav a:not(.btn) { display: none; }
-    .nav .btn {
-      padding: .5rem 1rem;
-      font-size: .8rem;
-      border-radius: 999px;
-    }
+  /* Responsive Breakpoint */
+  @media (max-width: 768px) {
+    .nav-desktop { display: none; }
+    .nav-mobile { display: block; }
   }
 </style>
