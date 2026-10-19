@@ -1,25 +1,31 @@
 ---
 const items = [
-  { img: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&q=70', title: 'Noche serena', text: 'Composición minimalista con acento cian.' },
-  { img: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&q=70', title: 'Niebla al alba', text: 'Tipografía clara sobre imágenes suaves.' },
-  { img: 'https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=800&q=70', title: 'Bosque profundo', text: 'Ritmo visual consistente en cada card.' },
+  { 
+    img: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&q=70', 
+    title: 'Proyecto Uno', 
+    text: 'Composición minimalista con acento cian y un enfoque en la experiencia de usuario.' 
+  },
+  { 
+    img: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&q=70', 
+    title: 'Proyecto Dos', 
+    text: 'Sesión de marca con tipografía clara y una paleta de colores suaves.' 
+  },
 ];
 ---
 <section class="section section--dark" id="work">
-  <!-- <span class="section-title">Proyectos</span>-->
   <div class="container">
     <header class="section-head">
       <h2>Casos recientes</h2>
-      <p>Tres piezas seleccionadas con la misma paleta y ritmo.</p>
+      <p>Una selección de nuestras piezas más recientes.</p>
     </header>
     <div class="grid grid-3">
       {items.map(i => (
         <article class="card">
-          <img src={i.img} alt="" loading="lazy" />
+          <img src={i.img} alt={i.title} loading="lazy" />
           <div class="card-body">
             <h3>{i.title}</h3>
             <p>{i.text}</p>
-            <a href="#" class="btn btn-ghost">Ver más</a>
+            <a href="/work" class="btn btn-ghost">Ver más</a>
           </div>
         </article>
       ))}
@@ -28,8 +34,76 @@ const items = [
 </section>
 
 <style>
-  .section--dark .card { background: var(--dark-2); border-color: #3a3a3a; }
-  .section--dark .card p { color: #b9b9b9; }
-  .section--dark .btn-ghost { color: #eee; border-color: #3a3a3a; }
-  .section--dark .btn-ghost:hover { border-color: #eee; }
+  /* Estilos específicos para la sección oscura */
+  .section--dark { 
+    background: var(--pixel-black); 
+    padding: var(--section-y) 0;
+  }
+  
+  .section--dark .section-head h2 { 
+    color: var(--paper-white); 
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  
+  .section--dark .section-head p { 
+    color: rgba(250, 248, 243, 0.7); 
+    font-size: 1.05rem;
+  }
+
+  /* Ajustes de las tarjetas en modo oscuro */
+  .section--dark :global(.card) { 
+    background: var(--dark-2); 
+    border-color: #3a3a3a; 
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  
+  .section--dark :global(.card:hover) {
+    transform: translateY(-4px);
+  }
+
+  .section--dark :global(.card img) {
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .section--dark :global(.card-body) {
+    padding: 2rem;
+  }
+  
+  .section--dark :global(.card h3) { 
+    color: var(--paper-white); 
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .section--dark :global(.card p) { 
+    color: #b9b9b9; 
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Botón fantasma en modo oscuro */
+  .section--dark :global(.btn-ghost) { 
+    color: var(--paper-white); 
+    border: 1px solid #3a3a3a;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    display: inline-block;
+    transition: all 0.2s ease;
+  }
+  
+  .section--dark :global(.btn-ghost:hover) { 
+    border-color: var(--paper-white); 
+    background: var(--paper-white);
+    color: var(--pixel-black);
+  }
 </style>
