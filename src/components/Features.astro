@@ -4,21 +4,25 @@ const features = [
     number: '01',
     title: 'Software',
     text: 'Desarrollo web, apps e integraciones que funcionan y escalan.',
+    href: '/servicios/software', // Ruta de ejemplo
   },
   {
     number: '02',
     title: 'Diseño',
     text: 'UI/UX, branding y sistemas de diseño coherentes.',
+    href: '/servicios/diseno',
   },
   {
     number: '03',
     title: 'Marketing',
     text: 'Contenido y campañas que hablan con tu audiencia.',
+    href: '/servicios/marketing',
   },
   {
     number: '04',
     title: 'Fotografía',
     text: 'Producto, editorial y eventos con carácter.',
+    href: '/servicios/fotografia',
   },
 ];
 ---
@@ -29,22 +33,25 @@ const features = [
       <div class="features-intro">
         <h2>Servicios</h2>
         <p>
-          "En Monograma no vendemos 'postings' ni 'páginas web' aisladas. Integramos desarrollo de software, 
-          diseño gráfico y fotografía profesional para ejecutar un marketing creativo, enfocado 
-          en objetivos reales y lo suficientemente disruptivo para que tu marca no pase desapercibida."
+          "En Monograma no vendemos 'posteos' ni 'páginas web' aisladas. Integramos desarrollo de software, 
+          diseño gráfico y fotografía profesional para crear un marketing creativo, enfocado 
+          en objetivos reales y lo suficientemente disruptivo para que tu marca sea visible."
           <br><br>- Raúl Hdz Molina.
         </p>
       </div>
 
-      <!-- Columna derecha: lista numerada -->
+      <!-- Columna derecha: lista numerada clickeable -->
       <ul class="features-list">
         {features.map((f) => (
-          <li class="feature-item">
-            <span class="feature-number">{f.number}</span>
-            <div class="feature-content">
-              <h3 class="feature-title">{f.title}</h3>
-              <p class="feature-text">{f.text}</p>
-            </div>
+          <li>
+            <a href={f.href} class="feature-item">
+              <span class="feature-number">{f.number}</span>
+              <div class="feature-content">
+                <h3 class="feature-title">{f.title}</h3>
+                <p class="feature-text">{f.text}</p>
+              </div>
+              <span class="feature-arrow" aria-hidden="true">&rarr;</span>
+            </a>
           </li>
         ))}
       </ul>
@@ -53,128 +60,66 @@ const features = [
 </section>
 
 <style>
-  .section--features {
-    background: var(--bg);
-    padding: var(--section-y) 0;
-  }
+  .section--features { background: var(--bg); padding: var(--section-y) 0; }
+  .features-grid { display: grid; grid-template-columns: 1fr 1.25fr; gap: 5rem; align-items: start; }
+  @media (max-width: 860px) { .features-grid { grid-template-columns: 1fr; gap: 3rem; } }
+  .features-intro { position: sticky; top: 6rem; }
+  @media (max-width: 860px) { .features-intro { position: static; } }
+  .features-intro h2 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; color: var(--ink); margin: 0 0 1.5rem; text-transform: uppercase; }
+  .features-intro p { color: var(--ink-soft); font-size: 1.05rem; line-height: 1.7; margin: 0; max-width: 420px; }
 
-  /* ===== Grid split ===== */
-  .features-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.25fr;    /* intro un poco más angosta */
-    gap: 5rem;
-    align-items: start;
-  }
-
-  @media (max-width: 860px) {
-    .features-grid {
-      grid-template-columns: 1fr;
-      gap: 3rem;
-    }
-  }
-
-  /* ===== Columna izquierda: intro ===== */
-  .features-intro {
-    position: sticky;                      /* se queda fija al scrollear */
-    top: 6rem;
-  }
-
-  @media (max-width: 860px) {
-    .features-intro {
-      position: static;
-    }
-  }
-
-  .features-intro h2 {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    color: var(--ink);
-    margin: 0 0 1.5rem;
-    text-transform: uppercase;
-  }
-
-  .features-intro p {
-    color: var(--ink-soft);
-    font-size: 1.05rem;
-    line-height: 1.7;
-    margin: 0;
-    max-width: 420px;
-  }
-
-  /* ===== Columna derecha: lista ===== */
-  .features-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
-  }
-
+  /* Lista */
+  .features-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0; }
+  
+  /* El enlace que envuelve al item */
   .feature-item {
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto 1fr auto; /* Columnas: número, contenido, flecha */
     gap: 1.5rem;
     align-items: start;
-    padding-bottom: 2.5rem;
+    padding: 2rem 0;
     border-bottom: 1px solid var(--line);
+    text-decoration: none;
+    transition: background 0.2s ease, padding 0.2s ease;
   }
 
-  .feature-item:last-child {
-    padding-bottom: 0;
-    border-bottom: none;
+  .feature-item:hover {
+    background: color-mix(in srgb, var(--paper-white) 50%, transparent);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 8px;
   }
 
-  /* ===== Número ===== */
-  .feature-number {
-    font-family: var(--font-display);
-    font-size: 1.25rem;
-    font-weight: 700;
-    letter-spacing: .05em;
-    color: var(--nintendo-red);
-    line-height: 1;
-    padding-top: .25rem;
-  }
+  .feature-item:last-child { border-bottom: none; }
 
-  /* ===== Contenido ===== */
-  .feature-title {
-    font-family: var(--font-display);
-    font-size: 1.35rem;
-    font-weight: 600;
-    line-height: 1.2;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    margin: 0 0 .55rem;
-    text-transform: uppercase;
-  }
+  /* Número */
+  .feature-number { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; letter-spacing: .05em; color: var(--nintendo-red); line-height: 1; padding-top: .25rem; }
 
-  .feature-text {
+  /* Contenido */
+  .feature-title { font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; line-height: 1.2; letter-spacing: -0.01em; color: var(--ink); margin: 0 0 .55rem; text-transform: uppercase; transition: color 0.2s; }
+  .feature-item:hover .feature-title { color: var(--nintendo-red); }
+  .feature-text { color: var(--ink-soft); font-size: .95rem; line-height: 1.6; margin: 0; }
+
+  /* Flecha */
+  .feature-arrow {
+    font-size: 1.5rem;
     color: var(--ink-soft);
-    font-size: .95rem;
-    line-height: 1.6;
-    margin: 0;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+    padding-top: 0.2rem;
+  }
+  
+  .feature-item:hover .feature-arrow {
+    opacity: 1;
+    transform: translateX(0);
+    color: var(--nintendo-red);
   }
 
-  /* ===== Responsive ===== */
   @media (max-width: 640px) {
-    .features-list {
-      gap: 2rem;
-    }
-
-    .feature-item {
-      gap: 1rem;
-      padding-bottom: 2rem;
-    }
-
-    .feature-number {
-      font-size: 1.1rem;
-    }
-
-    .feature-title {
-      font-size: 1.2rem;
-    }
+    .feature-item { padding: 1.5rem 0; gap: 1rem; }
+    .feature-number { font-size: 1.1rem; }
+    .feature-title { font-size: 1.2rem; }
+    .feature-arrow { display: none; } /* Oculta flecha en móvil para ahorrar espacio */
   }
 </style>

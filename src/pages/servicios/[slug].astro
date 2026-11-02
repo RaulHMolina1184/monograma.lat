@@ -1,0 +1,117 @@
+---
+import Base from '../../layouts/Base.astro';
+
+// 1. Los datos de los servicios
+const servicios = {
+  software: {
+    numero: '01',
+    titulo: 'Software',
+    descripcion: 'Desarrollo web, apps e integraciones que funcionan y escalan. Construimos la base tecnológica para que tu negocio no tenga límites.',
+  },
+  diseno: {
+    numero: '02',
+    titulo: 'Diseño',
+    descripcion: 'UI/UX, branding y sistemas de diseño coherentes. Creamos identidades visuales que conectan y experiencias de usuario que se disfrutan.',
+  },
+  marketing: {
+    numero: '03',
+    titulo: 'Marketing',
+    descripcion: 'Contenido y campañas que hablan con tu audiencia. Estrategias digitales enfocadas en objetivos reales y métricas que importan.',
+  },
+  fotografia: {
+    numero: '04',
+    titulo: 'Fotografía',
+    descripcion: 'Producto, editorial y eventos con carácter. Capturamos la esencia de tu marca con una mirada propia y profesional.',
+  }
+};
+
+// 2. Le decimos a Astro que genere estas 4 rutas
+export function getStaticPaths() {
+  return [
+    { params: { slug: 'software' } },
+    { params: { slug: 'diseno' } },
+    { params: { slug: 'marketing' } },
+    { params: { slug: 'fotografia' } },
+  ];
+}
+
+// 3. Astro lee el slug de la URL y busca el servicio
+const { slug } = Astro.params;
+const servicio = servicios[slug as keyof typeof servicios];
+
+// Si la URL no coincide con ningún servicio, tiramos un error 404
+if (!servicio) {
+  return Astro.redirect('/404');
+}
+---
+<Base title={`${servicio.titulo} — Monograma`}>
+  <section class="section" style="padding: 8rem 0 4rem;">
+    <div class="container" style="max-width: 800px;">
+      
+      <!-- Botón para volver -->
+      <a href="/#features" style="color: var(--ink-soft); font-size: 0.9rem; margin-bottom: 2rem; display: inline-block; text-decoration: none;">&larr; Volver a servicios</a>
+      
+      <!-- Encabezado Dinámico -->
+      <header style="margin-bottom: 4rem;">
+        <span style="color: var(--nintendo-red); font-weight: 700; font-size: 1.5rem; letter-spacing: 0.1em; text-transform: uppercase;">{servicio.numero}</span>
+        <h1 style="font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.1; margin: 1rem 0; color: var(--ink);">{servicio.titulo}</h1>
+        <p style="font-size: 1.25rem; color: var(--ink-soft); line-height: 1.6;">
+          {servicio.descripcion}
+        </p>
+      </header>
+
+      <!-- Contenido de ejemplo -->
+      <div class="service-content">
+        <h2>¿Qué incluye este servicio?</h2>
+        <p>Texto de ejemplo para {servicio.titulo}. Aquí puedes explicar tu proceso, las herramientas que usas, etc. Como esta página es dinámica, todo lo que escribas aquí se repetirá para los demás servicios.</p>
+        
+      <div class="highlight-box">
+        <h3>Beneficio clave</h3>
+        <p>Puedes usar bloques como este para destacar información importante.</p>
+      </div>
+        
+        <h2>Nuestro proceso</h2>
+        <ul style="line-height: 1.8;">
+          <li>Investigación y estrategia.</li>
+          <li>Ejecución y diseño.</li>
+          <li>Revisión y ajustes.</li>
+          <li>Lanzamiento y soporte.</li>
+        </ul>
+
+        <div style="margin-top: 4rem; text-align: center;">
+          <a href="/contact" class="btn btn-primary" style="background: var(--nintendo-red); color: var(--paper-white); padding: 1rem 2rem; border-radius: 8px; font-weight: 700; text-decoration: none;">Hablemos de tu proyecto</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+    <style>
+      /* Bloque oscuro */
+      .highlight-box {
+        background: var(--pixel-black);
+        color: var(--paper-white);
+        padding: 2.5rem;
+        border-radius: 12px;
+        margin: 3rem 0;
+        /* Eliminamos el border-left */
+      }
+
+      .highlight-box h3 {
+        margin-top: 0;
+        color: var(--nintendo-red); /* Título en rojo */
+        font-family: var(--font-display);
+        font-size: 1.35rem;
+        margin-bottom: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .highlight-box p {
+        margin-bottom: 0;
+        color: rgba(250, 248, 243, 0.85); 
+        font-size: 1.05rem;
+        line-height: 1.6;
+      }
+   </style>
+
+</Base>
