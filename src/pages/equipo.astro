@@ -1,0 +1,142 @@
+---
+import Base from '../layouts/Base.astro';
+
+// Datos del equipo
+const equipo = [
+  {
+    nombre: 'Raúl Hernández Molina',
+    rol: 'Fundador · Desarrollo tecnológico · Diseño creativo',
+    foto: '/images/equipo/teamPortraitRHM.jpg', 
+    bio: [
+      'Estudiante de Ingeniería en Sistemas, con formación complementaria en diseño gráfico y experiencia en fotografía, comunicación visual, desarrollo digital y gestión de proyectos.',
+      'Su trayectoria combina diferentes disciplinas que convergen en una misma inquietud: entender cómo funcionan las cosas, explorar nuevas posibilidades y transformar ideas en soluciones concretas.',
+      'Desde temprana edad desarrolló un interés por la identidad de las marcas, el diseño y la construcción. Esta curiosidad evolucionó hacia el diseño gráfico y posteriormente hacia la programación, encontrando en el desarrollo web un punto de encuentro entre creatividad y tecnología.',
+      'Se caracteriza por una mentalidad autodidacta, una infinita e inquieta curiosidad y una visión que combina pensamiento lógico, sensibilidad visual y experimentación.',
+      'Como fundador de Monograma, busca integrar tecnología, diseño, fotografía y estrategia para desarrollar propuestas con identidad, propósito y una perspectiva diferente.'
+    ]
+  }
+];
+---
+<Base title="Equipo — Monograma">
+  <section class="section" style="padding: 6rem 0; background: var(--bg);">
+    <div class="container">
+
+      <div class="team-list">
+        {equipo.map((persona) => (
+          <article class="team-profile">
+            
+            <!-- Columna Izquierda: Foto -->
+            <div class="team-sticky-container">
+              <div class="team-image-wrapper">
+                <img src={persona.foto} alt={`Foto de ${persona.nombre}`} class="team-image" />
+              </div>
+            </div>
+
+            <!-- Columna Derecha: Info -->
+            <div class="team-info">
+              <h2 class="team-name">{persona.nombre}</h2>
+              <span class="team-role">{persona.rol}</span>
+              
+              <div class="team-bio">
+                {persona.bio.map(parrafo => (
+                  <p>{parrafo}</p>
+                ))}
+              </div>
+            </div>
+
+          </article>
+        ))}
+      </div>
+
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* --- Layout del Perfil --- */
+  .team-profile {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr; 
+    gap: 4rem;
+    /* align-items: start; ELIMINADO para que la columna de la foto se estire */
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  /* --- Foto (Sticky) --- */
+  .team-image-wrapper {
+    position: sticky; 
+    top: 8rem; /* Se queda pegada 8rem debajo del header al hacer scroll */
+    /* Sin overflow: hidden para no romper el sticky */
+  }
+
+  .team-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3/4; 
+    object-fit: cover;
+    filter: grayscale(100%); /* Filtro B&N permanente */
+    display: block;
+  }
+
+  /* --- Textos --- */
+  .team-info {
+    /* Sin padding-top para que el texto arranque alineado con la foto */
+  }
+
+  .team-name {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 0.5rem;
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+
+  .team-role {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--nintendo-red);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 2rem;
+  }
+
+  .team-bio p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--ink-soft);
+    margin-bottom: 1.5rem;
+  }
+
+  /* --- Responsive (Móviles y Tablets) --- */
+  @media (max-width: 860px) {
+    .team-profile {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .team-image-wrapper {
+      position: relative; /* Desactivamos sticky en móviles */
+      top: 0;
+      max-width: 320px; 
+      margin: 0 auto; 
+    }
+
+    .team-info {
+      text-align: left; 
+    }
+
+    .team-name {
+      font-size: 2rem;
+      text-align: center; 
+    }
+
+    .team-role {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+  }
+</style>
