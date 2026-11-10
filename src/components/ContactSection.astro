@@ -43,10 +43,14 @@
   </div>
 </section>
 
-<!-- MODAL DE RESULTADO (Oculto por defecto) -->
+<!-- MODAL DE RESULTADO -->
 <div id="result-modal" class="modal-overlay">
   <div class="modal-box">
-    <div id="modal-icon" class="modal-icon"></div>
+    <div id="modal-icon" class="modal-icon">
+      <!-- Imágenes de los iconos (asegúrate de que las rutas sean correctas) -->
+      <img id="icon-success" src="/images/iconoExito.svg" alt="Éxito" class="icon-img hidden" />
+      <img id="icon-error" src="/images/iconoFallo.svg" alt="Error" class="icon-img hidden" />
+    </div>
     <h3 id="modal-title" class="modal-title"></h3>
     <p id="modal-message" class="modal-message"></p>
     <button id="modal-close" class="btn btn-primary">Entendido</button>
@@ -184,7 +188,7 @@
   .modal-overlay {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(31, 31, 31, 0.7); /* Pixel black con opacidad */
+    background: rgba(31, 31, 31, 0.7); 
     backdrop-filter: blur(4px);
     display: flex;
     align-items: center;
@@ -217,23 +221,21 @@
   }
 
   .modal-icon {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
+    width: 80px; 
+    height: 80px;
     margin: 0 auto 1.5rem;
     display: grid;
     place-items: center;
-    font-size: 2rem;
   }
 
-  .modal-icon.success {
-    background: color-mix(in srgb, var(--mint-green) 20%, transparent);
-    color: var(--mint-green);
+  .icon-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 
-  .modal-icon.error {
-    background: color-mix(in srgb, var(--nintendo-red) 15%, transparent);
-    color: var(--nintendo-red);
+  .hidden {
+    display: none !important; /* Aseguramos que se oculte bien */
   }
 
   .modal-title {
@@ -251,7 +253,7 @@
     margin-bottom: 2rem;
     line-height: 1.5;
   }
-    /* Botón del modal con el mismo hover del formulario */
+
   .modal-box .btn {
     display: inline-block;
     background: var(--nintendo-red);
@@ -271,8 +273,6 @@
     border-color: var(--nintendo-red);
     transform: translateY(-1px);
   }
-
-
 </style>
 
 <script>
@@ -281,15 +281,28 @@
 
   // Elementos del Modal
   const modal = document.getElementById('result-modal') as HTMLDivElement;
-  const modalIcon = document.getElementById('modal-icon') as HTMLDivElement;
   const modalTitle = document.getElementById('modal-title') as HTMLHeadingElement;
   const modalMessage = document.getElementById('modal-message') as HTMLParagraphElement;
   const modalClose = document.getElementById('modal-close') as HTMLButtonElement;
 
+  // Elementos de los Iconos
+  const iconSuccess = document.getElementById('icon-success') as HTMLImageElement;
+  const iconError = document.getElementById('icon-error') as HTMLImageElement;
+
   // Función para abrir el modal
   function showModal(type: 'success' | 'error', title: string, message: string) {
-    modalIcon.className = `modal-icon ${type}`;
-    modalIcon.innerHTML = type === 'success' ? '✓' : '✕';
+    
+    // Ocultamos ambos primero
+    iconSuccess.classList.add('hidden');
+    iconError.classList.add('hidden');
+
+    // Mostramos el que corresponde
+    if (type === 'success') {
+      iconSuccess.classList.remove('hidden');
+    } else {
+      iconError.classList.remove('hidden');
+    }
+
     modalTitle.textContent = title;
     modalMessage.textContent = message;
     modal.classList.add('is-active');
@@ -302,7 +315,7 @@
 
   modalClose.addEventListener('click', closeModal);
   modal.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal(); // Cierra si hace clic fuera de la caja
+    if (e.target === modal) closeModal(); 
   });
 
   // Lógica del formulario
