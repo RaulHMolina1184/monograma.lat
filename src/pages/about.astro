@@ -30,7 +30,6 @@ import Base from '../layouts/Base.astro';
 
       <!-- Columna Derecha: Texto -->
       <div class="about-content">
-        
         <div class="about-text">
           <p class="lead">Una curiosidad que se convirtió en una forma de crear.</p>
 
@@ -41,16 +40,18 @@ import Base from '../layouts/Base.astro';
           <p>Mi camino ha combinado formación académica, experiencia profesional y aprendizaje autodidacta. Cada etapa me ha permitido incorporar nuevas herramientas y perspectivas, desde la construcción física hasta el desarrollo de soluciones digitales.</p>
 
           <p>Monograma nace de esa evolución y de una aspiración personal: construir algo propio, desarrollar una identidad independiente y encontrar la libertad de trabajar, crear y materializar ideas a mi manera.</p>
-
-          <p>Hoy, esa visión se convierte en un proyecto que integra programación, diseño, fotografía y marketing. Cuatro disciplinas que se complementan para abordar diferentes necesidades de una marca, desde su identidad visual hasta su presencia y comunicación en el entorno digital.</p>
-
-          <p>Creemos que cada negocio tiene algo que comunicar y un potencial que desarrollar. Por eso, buscamos entender las ideas, los objetivos y las necesidades detrás de cada proyecto para convertirlos en soluciones creativas, funcionales y coherentes.</p>
-
-          <p>Porque crear no es solamente hacer algo visualmente atractivo. Es entender una idea, encontrar su propósito y darle forma.</p>
-
-          <p class="about-signoff">Monograma — Creativo. Objetivo. Disruptivo.</p>
         </div>
+      </div>
 
+      <!-- BLOQUE FULL WIDTH -->
+      <div class="about-full-width">
+        <p>Hoy, esa visión se convierte en un proyecto que integra programación, diseño, fotografía y marketing. Cuatro disciplinas que se complementan para abordar diferentes necesidades de una marca, desde su identidad visual hasta su presencia y comunicación en el entorno digital.</p>
+
+        <p>Creemos que cada negocio tiene algo que comunicar y un potencial que desarrollar. Por eso, buscamos entender las ideas, los objetivos y las necesidades detrás de cada proyecto para convertirlos en soluciones creativas, funcionales y coherentes.</p>
+
+        <p>Porque crear no es solamente hacer algo visualmente atractivo. Es entender una idea, encontrar su propósito y darle forma.</p>
+
+        <p class="about-signoff">Monograma — Creativo. Objetivo. Disruptivo.</p>
       </div>
 
     </div>
@@ -69,7 +70,7 @@ import Base from '../layouts/Base.astro';
 
   /* --- Columna Visual (Izquierda) --- */
   .about-visual {
-    position: relative; /* Unificado aquí (quitamos el sticky duplicado) */
+    position: relative; 
     top: 6rem;
   }
 
@@ -82,10 +83,20 @@ import Base from '../layouts/Base.astro';
     box-shadow: 0 20px 40px rgba(31, 31, 31, 0.1);
   }
 
+  .image-caption {
+    display: block;
+    text-align: right;
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    margin-top: 0.75rem;
+    letter-spacing: 0.02em;
+    opacity: 0.7;
+  }
+
   .about-logo {
     position: absolute;
     top: 2rem;
-    left: -4.375rem; /* 70px exactos: la mitad del ancho de 140px */
+    left: -4.375rem; 
     width: 140px;
     height: auto;
     filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
@@ -97,7 +108,6 @@ import Base from '../layouts/Base.astro';
     padding-top: 14rem; 
   }
 
-  /* --- El Título sobre la imagen --- */
   .about-title {
     position: absolute;
     top: 1.5rem; 
@@ -114,10 +124,9 @@ import Base from '../layouts/Base.astro';
     white-space: nowrap; 
   }
 
-  /* Colores del título */
   .title-white {
     color: var(--paper-white); 
-    text-shadow: 0 4px 15px rgba(31, 31, 31, 0.3); /* Sombra para que resalte en fondos claros */
+    text-shadow: 0 4px 15px rgba(31, 31, 31, 0.3); 
   }
 
   .title-black {
@@ -131,7 +140,6 @@ import Base from '../layouts/Base.astro';
     margin-bottom: 1.5rem;
   }
 
-  /* El primer párrafo (lead) resalta más */
   .about-text .lead {
     font-size: 1.25rem;
     color: var(--ink);
@@ -140,15 +148,30 @@ import Base from '../layouts/Base.astro';
     line-height: 1.5;
   }
 
-  /* La firma final */
-  .about-text .about-signoff {
+  /* --- Bloque Full Width (Sin línea divisoria) --- */
+  .about-full-width {
+    grid-column: 1 / -1; 
+    margin-top: -4rem; 
+    padding-top: 0;
+    border-top: none; 
+  }
+
+  .about-full-width p {
+    font-size: 1.05rem; /* Mismo tamaño que los párrafos anteriores */
+    line-height: 1.75;
+    color: var(--ink-soft);
+    margin-bottom: 1.5rem; /* Mismo espacio entre párrafos */
+  }
+
+  .about-full-width .about-signoff {
     font-family: var(--font-display);
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: var(--nintendo-red);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin-top: 3rem;
+    text-align: right; 
   }
 
   /* =========================================
@@ -165,7 +188,7 @@ import Base from '../layouts/Base.astro';
       top: 0;
       max-width: 85%; 
       margin: 0 auto; 
-      margin-top: 8rem; /* Más espacio para que respire el título */
+      margin-top: 8rem; 
     }
 
     .about-logo {
@@ -177,7 +200,7 @@ import Base from '../layouts/Base.astro';
 
     .about-title {
       position: absolute;
-      top: -8rem; /* Sube el título para que no choque con el logo */
+      top: -8rem; 
       left: 50%;
       transform: translateX(-50%);
       text-align: center;
@@ -185,14 +208,23 @@ import Base from '../layouts/Base.astro';
       font-size: 2.2rem; 
     }
 
-    /* Todo el título en negro en móvil para garantizar legibilidad */
     .about-title .title-white {
       color: var(--pixel-black);
       text-shadow: none; 
     }
 
     .about-content {
-      padding-top: 0rem; /* Da espacio entre la imagen y el párrafo */
+      padding-top: 0; 
+      margin-bottom: 0;
+    }
+
+    .about-full-width {
+      margin-top: -2rem;
+      padding-top: 0; 
+    }
+
+    .about-full-width .about-signoff {
+      text-align: left; 
     }
   }
 </style>
