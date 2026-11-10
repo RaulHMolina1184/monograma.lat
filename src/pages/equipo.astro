@@ -6,25 +6,31 @@ const equipo = [
   {
     nombre: 'Raúl Hernández Molina',
     rol: 'Fundador · Desarrollo tecnológico · Diseño creativo',
-    foto: '/images/equipo/teamPortraitRHM.jpg', 
+    foto: '/images/equipo/teamPortraitRHM.jpg',
     bio: [
-      'Estudiante de Ingeniería en Sistemas, con formación complementaria en diseño gráfico y experiencia en fotografía, comunicación visual, desarrollo digital y gestión de proyectos.',
-      'Su trayectoria combina diferentes disciplinas que convergen en una misma inquietud: entender cómo funcionan las cosas, explorar nuevas posibilidades y transformar ideas en soluciones concretas.',
-      'Desde temprana edad desarrolló un interés por la identidad de las marcas, el diseño y la construcción. Esta curiosidad evolucionó hacia el diseño gráfico y posteriormente hacia la programación, encontrando en el desarrollo web un punto de encuentro entre creatividad y tecnología.',
-      'Se caracteriza por una mentalidad autodidacta, una infinita e inquieta curiosidad y una visión que combina pensamiento lógico, sensibilidad visual y experimentación.',
-      'Como fundador de Monograma, busca integrar tecnología, diseño, fotografía y estrategia para desarrollar propuestas con identidad, propósito y una perspectiva diferente.'
+      'Estudiante de Ingeniería en Sistemas, con formación complementaria en diseño gráfico y experiencia en fotografía, comunicación visual, desarrollo digital y gestión de proyectos. Su trayectoria reúne conocimientos y experiencias de distintas disciplinas que hoy convergen en su trabajo creativo y tecnológico.',
+
+      'Desde temprana edad mostró interés por construir, diseñar y comprender cómo funcionan las cosas. Mientras disfrutaba crear y experimentar con objetos, también desarrolló una fascinación por los logotipos, las marcas, los empaques y la comunicación visual. Con el tiempo, ese interés evolucionó hacia el diseño gráfico y posteriormente hacia la tecnología, encontrando en el desarrollo de software especialmente en la parte web un punto de encuentro entre creatividad y pensamiento lógico.',
+
+      'Su trayectoria también refleja una constante capacidad de adaptación y aprendizaje. Ha incursionado por diferentes áreas de formación y experiencia, desde la ebanistería y el trabajo manual hasta el diseño y la programación, desarrollando conocimientos tanto en entornos académicos como de manera autodidacta. Para él, aprender no se limita a adquirir habilidades: implica investigar, experimentar y comprender a fondo cada tema.',
+
+      'Se caracteriza por una curiosidad inquieta y una atención particular a los detalles. Cuando algo despierta su interés, suele profundizar hasta entender cómo funciona, descubrir aspectos poco conocidos y encontrar conexiones que no siempre son evidentes. Esta forma de explorar se manifiesta tanto en sus proyectos como en sus intereses personales, entre ellos el ciclismo de montaña, donde disfruta conocer los aspectos técnicos y prácticos de cada componente y la disciplina al practicarlo.',
+
+      'De personalidad introvertida, valora las conversaciones profundas y los espacios de confianza, aunque también procura desarrollar habilidades que inicialmente se encuentran fuera de su zona de confort. Durante su formación el Colegio Universitario de Cartago en un curso de Comunicación llegó a describir que hablar en público como un superpoder que quería aprender a desarrollar, una idea que refleja su disposición a reconocer sus propios desafíos y convertirlos en oportunidades de crecimiento.',
+
+      'Como fundador de Monograma, busca reunir tecnología, diseño, fotografía y estrategia bajo una misma visión: crear soluciones con identidad, propósito y carácter propio. Su filosofía parte de cuestionar lo establecido, explorar nuevas posibilidades y encontrar maneras diferentes de transformar ideas en propuestas concretas.'
     ]
   }
 ];
 ---
 <Base title="Equipo — Monograma">
-  <section class="section" style="padding: 6rem 0; background: var(--bg);">
+  <section class="section team-section">
     <div class="container">
 
       <div class="team-list">
         {equipo.map((persona) => (
           <article class="team-profile">
-            
+
             <!-- Columna Izquierda: Foto -->
             <div class="team-sticky-container">
               <div class="team-image-wrapper">
@@ -36,7 +42,7 @@ const equipo = [
             <div class="team-info">
               <h2 class="team-name">{persona.nombre}</h2>
               <span class="team-role">{persona.rol}</span>
-              
+
               <div class="team-bio">
                 {persona.bio.map(parrafo => (
                   <p>{parrafo}</p>
@@ -53,41 +59,54 @@ const equipo = [
 </Base>
 
 <style>
+  /* --- Sección --- */
+  .team-section {
+    padding: 6rem 0;
+    background: var(--bg);
+  }
+
   /* --- Layout del Perfil --- */
   .team-profile {
     display: grid;
-    grid-template-columns: 1fr 1.5fr; 
+    grid-template-columns: 1fr 1.5fr;
     gap: 4rem;
-    /* align-items: start; ELIMINADO para que la columna de la foto se estire */
+    align-items: stretch; /* la columna de la foto se estira para que el sticky tenga recorrido */
     max-width: 1000px;
     margin: 0 auto;
   }
 
+  /* --- Columna de la foto: ocupa toda la altura de la fila --- */
+  .team-sticky-container {
+    height: 100%;
+  }
+
   /* --- Foto (Sticky) --- */
   .team-image-wrapper {
-    position: sticky; 
-    top: 8rem; /* Se queda pegada 8rem debajo del header al hacer scroll */
+    position: sticky;
+    top: 6rem; /* ajusta según la altura de tu header */
+    margin: 0;
+    padding: 0;
     /* Sin overflow: hidden para no romper el sticky */
   }
 
   .team-image {
+    display: block;
     width: 100%;
     height: auto;
-    aspect-ratio: 3/4; 
+    aspect-ratio: 3 / 4;
     object-fit: cover;
-    filter: grayscale(100%); /* Blanco y negro permanente por defecto */
-    transition: filter 0.4s ease; /* Transición suave para el color */
-    display: block;
+    filter: grayscale(100%);
+    transition: filter 0.4s ease;
   }
-  
-    /* Efecto al pasar el puntero (Desktop) */
+
+  /* Efecto al pasar el puntero (Desktop) */
   .team-image-wrapper:hover .team-image {
-    filter: grayscale(0%); /* Recupera el color */
+    filter: grayscale(0%);
   }
 
   /* --- Textos --- */
   .team-info {
-    /* Sin padding-top para que el texto arranque alineado con la foto */
+    padding-top: 0;
   }
 
   .team-name {
@@ -96,7 +115,8 @@ const equipo = [
     font-weight: 700;
     color: var(--ink);
     margin: 0 0 0.5rem;
-    line-height: 1.1;
+    padding: 0;
+    line-height: 1; /* sin espacio extra arriba de las mayúsculas */
     text-transform: uppercase;
   }
 
@@ -114,7 +134,7 @@ const equipo = [
     font-size: 1.05rem;
     line-height: 1.75;
     color: var(--ink-soft);
-    margin-bottom: 1.5rem;
+    margin: 0 0 1.5rem;
   }
 
   /* --- Responsive (Móviles y Tablets) --- */
@@ -124,20 +144,24 @@ const equipo = [
       gap: 2.5rem;
     }
 
+    .team-sticky-container {
+      height: auto;
+    }
+
     .team-image-wrapper {
       position: relative; /* Desactivamos sticky en móviles */
       top: 0;
-      max-width: 320px; 
-      margin: 0 auto; 
+      max-width: 320px;
+      margin: 0 auto;
     }
 
     .team-info {
-      text-align: left; 
+      text-align: left;
     }
 
     .team-name {
       font-size: 2rem;
-      text-align: center; 
+      text-align: center;
     }
 
     .team-role {
