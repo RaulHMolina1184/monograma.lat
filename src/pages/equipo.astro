@@ -75,8 +75,14 @@ const equipo = [
     height: auto;
     aspect-ratio: 3/4; 
     object-fit: cover;
-    filter: grayscale(100%); /* Filtro B&N permanente */
+    filter: grayscale(100%); /* Blanco y negro permanente por defecto */
+    transition: filter 0.4s ease; /* Transición suave para el color */
     display: block;
+  }
+  
+    /* Efecto al pasar el puntero (Desktop) */
+  .team-image-wrapper:hover .team-image {
+    filter: grayscale(0%); /* Recupera el color */
   }
 
   /* --- Textos --- */
