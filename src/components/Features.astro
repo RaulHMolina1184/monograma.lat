@@ -9,7 +9,7 @@ const features = [
   {
     number: '02',
     title: 'Soluciones Tecnológicas',
-    text: 'Desarrollo de software y páginas web, mantenimiento de equipos y soporte técnico para empresas y negocios.',
+    text: 'Desarrollo de software y páginas web,mantenimiento de equipos y soporte técnico para empresas y negocios.',
     href: '/servicios/soluciones-tecnologicas',
   },
 ];
@@ -73,6 +73,9 @@ const features = [
     padding-left: 1rem;
     padding-right: 1rem;
     border-radius: 8px;
+    opacity: 1;
+    transform: translateX(0);
+    color: var(--nintendo-red);
   }
 
   .feature-item:last-child { border-bottom: none; }
@@ -85,12 +88,6 @@ const features = [
   .feature-item:hover .feature-title { color: var(--nintendo-red); }
   .feature-text { color: var(--ink-soft); font-size: .95rem; line-height: 1.6; margin: 0; }
   
-  .feature-item:hover {
-    opacity: 1;
-    transform: translateX(0);
-    color: var(--nintendo-red);
-  }
-
   @media (max-width: 640px) {
     .feature-item { padding: 1.5rem 0; gap: 1rem; }
     .feature-number { font-size: 1.1rem; }
